@@ -8,6 +8,8 @@ const pino = require('express-pino-logger')();
 const path = require('path');
 const cors = require('cors');
 // const SECRET_KEY = "random";
+const SECRET_KEY = process.env.SECRET_KEY || 'somesting';
+
 
 
 //add sql database
@@ -73,7 +75,8 @@ app.post("/sign-in-customer", function(req, res) {
           console.log("hiiiiiiiiii")
           const token = jwt.sign({
             userEmail:userEmail
-          }, { expiresIn: 5000})
+          }, SECRET_KEY, { expiresIn: 5000})
+          console.log(" YOU ARE IN, THANKS!")
           return res.send({token: token})
         } else {
           return res.status(HTTP_UNAUTHORIZED).send({error: 'Wrong password'});
