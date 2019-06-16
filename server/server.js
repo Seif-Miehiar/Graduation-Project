@@ -6,7 +6,9 @@ const bodyParser = require('body-parser');
 const { Address, User } = require("../database/database-models.js");
 const pino = require('express-pino-logger')();
 const path = require('path');
-const cors = require('cors')
+const cors = require('cors');
+// const SECRET_KEY = "random";
+
 
 //add sql database
 const app = express();
@@ -22,6 +24,8 @@ const HTTP_UNAUTHORIZED = 401;
 const HTTP_SERVER_ERROR = 500;
 
 app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.json())
+
 app.use(cors())
 // app.use(express.static(path.join(__dirname, '')));
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -33,6 +37,55 @@ app.post('/sign-up-customer', (req, res, next) => {
   console.log(req.body);
   const { body } = req;
   const { username, userEmail, phonenumber, password } = body
+
+  const hashedpass = bcrypt.hashSync(password, saltRounds);
+
+  User.create({
+    userEmail: userEmail,
+    username: username,
+    phonenumber: phonenumber,
+    password: hashedpass
+  }).then(() => {
+    return res.status(HTTP_CREATED).send('Sign up successful')
+  }).catch((err) => {
+    if (err.name === "SequelizeUniqueConstraintError") {
+      return res.status(HTTP_BAD_REQUEST).send('This Email is already in use')
+    }
+    return res.status(HTTP_SERVER_ERROR).send('Server Error')
+  })
+});
+
+app.post("/sign-in-customer", function(req, res) {
+  const userEmail = req.body.userEmail;
+  const password = req.body.password;
+  console.log(password)
+  // const newHashedPassword = bcrypt.hashSync(password, saltRounds);
+  
+  
+  User.findOne({where: {userEmail: userEmail}}).then(function(user) {
+    if(!user){
+      return res.status(HTTP_UNAUTHORIZED).send("Please Sign Up First")
+    }
+    if(user){
+      bcrypt.compare(password, user.password).then(function(isMatch){
+        console.log(password, "\n\n\n\n\n\n", user.password, "\n\n\n\n\n\n" )
+        if(isMatch) {
+          console.log("hiiiiiiiiii")
+          const token = jwt.sign({
+            userEmail:userEmail
+          }, { expiresIn: 5000})
+          return res.send({token: token})
+        } else {
+          return res.status(HTTP_UNAUTHORIZED).send({error: 'Wrong password'});
+        }
+      }).catch(function(err){
+        res.status(501).send(err);
+        console.log(err, "Please Sign up first");
+
+})
+    }
+  })
+})
   // const username = req.body.username;
   // const userEmail = req.body.userEmail;
   // const phonenumber = req.body.phonenumber;
@@ -63,53 +116,44 @@ app.post('/sign-up-customer', (req, res, next) => {
   // }
   // userEmail = userEmail.toLowerCase();
 
-  const hashedpass = bcrypt.hashSync(password, saltRounds);
 
-  User.create({
-    userEmail: userEmail,
-    username: username,
-    phonenumber: phonenumber,
-    password: hashedpass
-  }).then(() => {
-    return res.status(HTTP_CREATED).send('Sign up successful')
-  }).catch((err) => {
-    if (err.name === "SequelizeUniqueConstraintError") {
-      return res.status(HTTP_BAD_REQUEST).send('This Email is already in use')
-    }
-    return res.status(HTTP_SERVER_ERROR).send('Server Error')
-  })
-});
+// app.post("/sign-in-customer", function(req, res, next) {
+//   const userEmail = req.body.userEmail;
+//   const password = req.body.password;
+// // console.log(userEmail)
+// console.log(password)
+//     const newPass = bcrypt.hashSync(password, saltRounds)
 
-
-app.post("/sign-in-customer", function(req, res, next) {
-  const userEmail = req.body.userEmail;
-  const password = req.body.password;
-console.log(userEmail)
-  User.findOne({
-    Where:{
-      userEmail: userEmail
-    }
-  }).then(function(user){
-    const hashedPass = user.password;
-    console.log("lllllllllllllllllllllll\n", hashedPass, "\nkkkkkkkkkkkkkk", user, "\nyyyyyyyyyyyyyy", userEmail)
-    bcrypt.compare(password, hashedPass).then(function(isMatch){
-      if(isMatch){
-        const token = jwt.sign({
-          userEmail: user.userEmail
-        }, SECRET_KEY, {
-          expiresIn: 7500
-        })
-      } else {
-        return res.status(401).send({
-          error: "Wrong Password!"
-        })
-      }
-    }).catch(function(err){
-      res.status(501).send(err);
-      console.log("Please Sign up first");
-    })
-  })
-})
+//   User.findOne({
+//     Where:{
+//       userEmail: userEmail
+//     }
+//   }).then(function(user){
+//     if(!user.userEmail){
+//       return res.status(HTTP_UNAUTHORIZED).send({error: 'Please sign up'}); 
+//     }
+//     const hashedPass = user.password;
+//     console.log(user.userEmail ,"lllllllllllllllllllllll\n", hashedPass, "\nkkkkkkkkkkkkkk", user, "\nyyyyyyyyyyyyyy", userEmail)
+//     bcrypt.compare(newPass, hashedPass).then(function(isMatch){
+//       if(isMatch){
+//         console.log("\n qqqqqqqqqqqqqqqqqq \n", isMatch, "\n fffffffffffffffff \n")
+//         const token = jwt.sign({
+//           userEmail: user.userEmail
+//         },{
+//           expiresIn: 7500
+//         })
+//         return res.send({token: token});
+//       } else {
+//         return res.status(401).send({
+//           error: "Wrong Password!"
+//         })
+//       }
+//     }).catch(function(err){
+//       res.status(501).send(err);
+//       console.log("Please Sign up first");
+//     })
+//   })
+// })
 // Sign In Admin (dispatch)
 // app.post('/sign-in-customer', (req, res) => {
 //   const userEmail = req.body.userEmail;
@@ -256,9 +300,9 @@ app.post("/register-address", (req, res) => {
 
 
 // });
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+// app.get('/', function (req, res) {
+//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// });
 
 app.listen(port, () => {
   console.log('listening on port ' + port + ' Happy Hacking!')
