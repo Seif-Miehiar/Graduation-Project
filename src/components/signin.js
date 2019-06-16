@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import AppBar from 'material-ui/AppBar';
@@ -22,10 +22,10 @@ class Signincustomer extends React.Component {
     }
   }
 
-  handleChange(e) {
-    console.log(e.target.value);
-    this.setState({ [e.target.name]: e.target.value });
-  }
+  // handleChange(e) {
+  //   console.log(e.target.value);
+  //   this.setState({ [e.target.name]: e.target.value });
+  // }
 
   clicked() {
     this.setState({
@@ -35,6 +35,18 @@ class Signincustomer extends React.Component {
       isEnabled: false
     });
   }
+  onChange(event){
+    const userEmail = event.target.userEmail;
+    const phoneNumber = event.target.phoneNumber;
+    const password = event.target.password;
+    const value = event.target.value;
+    this.setState({
+      [userEmail]: value,
+      [phoneNumber] : value,
+      [password] : value
+    });
+  }
+
 
   handleUserEmailChange = evt => {
     this.setState({ email: evt.target.value });
@@ -51,28 +63,28 @@ class Signincustomer extends React.Component {
     event.preventDefault();
     const data = this.state
     fetch('http://localhost:8080/sign-in-customer', {
-      method: 'post',
+      method: 'GET',
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
         'Accept': 'application/json'
       }
     }).then(response => response.json())
-      .then(state => console.log("yoooo", state)).catch((err) => console.log("nooooo", err));
+      .then(state => console.log("siiiiiiiii", state)).catch((err) => console.log("innnnnnn", err));
 
 
   }
 
 
   render() {
-    const { userEmail, password } = this.state;
+    // const { userEmail, password } = this.state;
     // var isEnabled = userEmail.length > 0 && password.length > 0;
 
 
 
     return (
       <div>
-      <body id="logintyle">
+      <div id="logintyle">
 
         <div class="limiter">
           <div class="container-login100">
@@ -82,19 +94,29 @@ class Signincustomer extends React.Component {
                   Account Login
 					</span>
 
-                <div class="wrap-input100 rs1 validate-input" data-validate="Username is required">
-                  <input class="input100" type="text" name="email or Number" onChange={this.handleUserEmailChange} />
+                <div class="wrap-input100 rs1 validate-input" data-validate="Email is required">
+                  <input class="input100"
+                    type="text"
+                    name="email or Number"
+                    value={this.props.userEmail}
+                    onChange={this.handleChange}
+                    // onChange={this.handleUserEmailChange}
+                     />
                   <span class="label-input100">Username</span>
                 </div>
 
 
                 <div class="wrap-input100 rs2 validate-input" data-validate="Password is required">
-                  <input class="input100" type="password" name="pass" onChange={this.handlePasswordChange} />
+                  <input class="input100" type="password" name="password" 
+                  value={this.props.password}
+                  onChange={this.handleChange}
+
+                  />
                   <span class="label-input100">Password</span>
                 </div>
 
                 <div class="container-login100-form-btn">
-                  <Link to="/Shopnew">
+                  <NavLink to="/Shopnew">
                     <button class="login100-form-btn"
                     Click={(event) => {
                         this.click(event)
@@ -103,19 +125,19 @@ class Signincustomer extends React.Component {
                       
                       Sign in
 						</button>
-                  </Link>
+                  </NavLink>
                 </div>
 
                 <div class="text-center w-full p-t-23">
                   <a href="/sign-up-customer" class="txt1">
-                    Forgot password?
+                    Sign Up ?
 						</a>
                 </div>
               </form>
             </div>
           </div>
         </div>
-        </body></div>
+        </div></div>
             )
           }
         }

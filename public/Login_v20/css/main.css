@@ -447,7 +447,7 @@ input.input100 {
 @media (max-width: 576px) {
   .wrap-input100 {
     width: 100%;
-  }
+  } 
 
   .wrap-input100.rs1 {
     border-top-right-radius: 12px;

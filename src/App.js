@@ -9,9 +9,9 @@ import {
 
 import Welcomepage from './components/welcomepage';
 import Cardlist from './components/cardlist';
-import Header from './components/header';
+// import Header from './components/header';
 import Shoppage from './components/shop';
-import Footer from "./components/footer";
+// import Footer from "./components/footer";
 import Signincustomer from "./components/signin";
 import Shopnew from "./components/shopnew";
 import Signupcustomer from './components/signup';

@@ -2,7 +2,7 @@ import React from 'react';
 import Header from "./header";
 import Footer from "./footer";
 // import ReactDom from "react-dom";
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+// import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 // import "../../public/css"
 
 
@@ -28,9 +28,9 @@ class Welcomepage extends React.Component {
 		  <div className="social">
 				<ul>
 					<li><a href="https://www.facebook.com/iPlayJor/?modal=admin_todo_tour"><span className="fa"> </span></a></li>
-					<li><a href="#"><span className="tw"> </span></a></li>
+					<li><a href="/"><span className="tw"> </span></a></li>
 					<li><a href="iPlay@gmail.com"><span className="g"> </span></a></li>
-					<li><a href="#"><span className="in"> </span></a></li>
+					<li><a href="/"><span className="in"> </span></a></li>
 				</ul>
 				<div className="clearfix"></div>
 		 </div>
@@ -117,8 +117,8 @@ class Welcomepage extends React.Component {
 		  <div className="col-md-4 content-right">
 			  {/* <!-- Nav tabs --> */}
                     <ul className="nav nav-tabs nav2" role="tablist">
-                    <li role="presentation" className="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Trending</a></li>
-                    <li role="presentation" ><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Recent Posts</a></li>
+                    <li role="presentation" className="active"><a href="/home" aria-controls="home" role="tab" data-toggle="tab">Trending</a></li>
+                    <li role="presentation" ><a href="/profile" aria-controls="profile" role="tab" data-toggle="tab">Recent Posts</a></li>
                     </ul>
                {/* <!-- Tab panes --> */}
               <div className="tab-content">
@@ -161,7 +161,7 @@ class Welcomepage extends React.Component {
 								</div>
 								<div className="col-md-9 tab-post-info">
 								<h4 id="ppp"><a href="single.html">IronMan</a></h4>
-								<p>Posted By <a href="#">Admin</a> &nbsp;&nbsp; on June 2, 2015 &nbsp;&nbsp; <a href="#">Comments (10)</a></p>
+								<p>Posted By <a href="/">Admin</a> &nbsp;&nbsp; on June 2, 2015 &nbsp;&nbsp; <a href="/">Comments (10)</a></p>
 								</div>
 								<div className="clearfix"></div>
 							</div>
@@ -171,7 +171,7 @@ class Welcomepage extends React.Component {
 								</div>
 								<div className="col-md-9 tab-post-info">
 								<h4 id="ppp"><a href="single.html">God Of War</a></h4>
-								<p>Posted By <a href="#">Admin</a> &nbsp;&nbsp; on June 2, 2015 &nbsp;&nbsp; <a href="#">Comments (10)</a></p>
+								<p>Posted By <a href="/">Admin</a> &nbsp;&nbsp; on June 2, 2015 &nbsp;&nbsp; <a href="/">Comments (10)</a></p>
 								</div>
 								<div className="clearfix"></div>
 							</div>
@@ -181,7 +181,7 @@ class Welcomepage extends React.Component {
 								</div>
 								<div className="col-md-9 tab-post-info">
 								<h4><a href="single.html">Need For Speed</a></h4>
-								<p>Posted By <a href="#">Admin</a> &nbsp;&nbsp; on June 2, 2015 &nbsp;&nbsp; <a href="#">Comments (10)</a></p>
+								<p>Posted By <a href="/">Admin</a> &nbsp;&nbsp; on June 2, 2015 &nbsp;&nbsp; <a href="/">Comments (10)</a></p>
 								</div>
 								<div className="clearfix"></div>
 							</div>
@@ -191,14 +191,14 @@ class Welcomepage extends React.Component {
 			 <div className="category blog-ctgry">
 					<h4 id="ppp">Top Games</h4>
 					<div className="list-group">
-						<a href="#" className="list-group-item">Cras justo odio</a>
-						<a href="#" className="list-group-item">Dapibus ac facilisis in</a>
-						<a href="#" className="list-group-item">Morbi leo risus</a>
-						<a href="#" className="list-group-item">Porta ac consectetur ac</a>
-						<a href="#" className="list-group-item">Vestibulum at eros</a>
-						<a href="#" className="list-group-item">Quisque elementum </a>
-						<a href="#" className="list-group-item">Vestibulum eleifend</a>
-						<a href="#" className="list-group-item">Donec sit amet justo </a>
+						<a href="/" className="list-group-item">Cras justo odio</a>
+						<a href="/" className="list-group-item">Dapibus ac facilisis in</a>
+						<a href="/" className="list-group-item">Morbi leo risus</a>
+						<a href="/" className="list-group-item">Porta ac consectetur ac</a>
+						<a href="/" className="list-group-item">Vestibulum at eros</a>
+						<a href="/" className="list-group-item">Quisque elementum </a>
+						<a href="/" className="list-group-item">Vestibulum eleifend</a>
+						<a href="/" className="list-group-item">Donec sit amet justo </a>
 					</div>
 			 </div>	
 			 <div className="photo-gallery">
