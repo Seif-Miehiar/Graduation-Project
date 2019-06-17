@@ -19,7 +19,7 @@ const saltRounds = 10;
 
 //status codes
 // const UNAUTHORIZED_STATUS = 401;
-const SERVER_ERROR = 500;
+const SERVER_ERROR = 500; 
 const HTTP_CREATED = 201;
 const HTTP_BAD_REQUEST = 400;
 const HTTP_UNAUTHORIZED = 401;
