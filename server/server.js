@@ -89,6 +89,97 @@ app.post("/sign-in-customer", function(req, res) {
     }
   })
 })
+
+app.post("/register-address", (req, res) => {
+  console.log(req.body);
+  const area = req.body.area;
+  const streetName = req.body.streetName;
+  const buildingNumberr = req.body.buildingNumberr;
+  const phoneNumber = req.body.phoneNumber;
+
+  Address.create({
+    area: area,
+    streetName: streetName,
+    buildingNumberr: buildingNumberr,
+    phoneNumber: phoneNumber
+  }).then((tt) => {
+    console.log('Done, You are succesfully sign up :D');
+    return res.send({ done: " succesful", tt: tt });
+  }).catch((err) => {
+    console.log(err);
+    return res.status(SERVER_ERROR).send({ error: 'server error' });
+  });
+
+
+});
+
+app.listen(port, () => {
+  console.log('listening on port ' + port + ' Happy Hacking!')
+});
+// if (data.email) {
+//   console.log("Email already exists!");
+//   alert('Email already exists!');
+//   console.error('Please Change your email address, Thank you!');
+//   return res.send('Email already in use from another customer, Please sign up with another email address.')
+
+// } else if (data.phonenumber) {
+//   console.log("phone numbar already exists!");
+//   alert('phone numbar already exists!');
+//   console.error('Please Change your phonen umbar, Thank you!');
+//   return res.send('phone numbar already in use for another customer, Please sign up with another phone numbar.')
+
+// } else if (data.email && data.phonenumber) {
+//   console.log("Please Change your email and phone number to signup");
+//   alert('Please Change your email and phone number to signup');
+//   console.error('Email & Phone number are already used, Please change them to sign up');
+//   return res.send('Email & Phone number are used for another customer please change them, Thank you!');
+
+// } 
+
+
+// app.get('/', function (req, res) {
+//   res.send('Welcome to thesis MVP')
+// });
+
+// User.findOne({ userEmail: userEmail, phonenumber: phonenumber }).then((data) => {
+//   console.log(data)
+//   if (data.userEmail) {
+//     console.log("Email already exists!");
+//     console.error('Please Change your email address, Thank you!');
+//     return res.send('Email already in use from another customer, Please sign up with another email address.')
+
+//   } else if (data.phonenumber) {
+//     console.log("phone numbar already exists!");
+//     console.error('Please Change your phonen umbar, Thank you!');
+//     return res.send('phone numbar already in use for another customer, Please sign up with another phone numbar.')
+
+//   } else if (data.userEmail && data.phonenumber) {
+//     console.log("Please Change your email and phone number to signup");
+//     console.error('Email & Phone number are already used, Please change them to sign up');
+//     return res.send('Email & Phone number are used for another customer please change them, Thank you!');
+
+// } else {
+//   User.create({
+//     username: username,
+//     userEmail: userEmail,
+//     phonenumber: phonenumber,
+//     password: hashedpass
+//   }).then((tt) => {
+//     console.log('Done, You are succesfully sign up :D');
+//     return res.send({ done: " succesful", tt: tt });
+//   }).catch((err) => {
+//     console.log(err);
+//     return res.status(SERVER_ERROR).send({ error: 'server error' });
+//   });
+// }
+
+
+// });
+// app.get('/', function (req, res) {
+//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// });
+
+
   // const username = req.body.username;
   // const userEmail = req.body.userEmail;
   // const phonenumber = req.body.phonenumber;
@@ -220,93 +311,3 @@ app.post("/sign-in-customer", function(req, res) {
 //   });
 
 // });
-
-app.post("/register-address", (req, res) => {
-  console.log(req.body);
-  const area = req.body.area;
-  const streetName = req.body.streetName;
-  const buildingNumberr = req.body.buildingNumberr;
-  const phoneNumber = req.body.phoneNumber;
-
-  Address.create({
-    area: area,
-    streetName: streetName,
-    buildingNumberr: buildingNumberr,
-    phoneNumber: phoneNumber
-  }).then((tt) => {
-    console.log('Done, You are succesfully sign up :D');
-    return res.send({ done: " succesful", tt: tt });
-  }).catch((err) => {
-    console.log(err);
-    return res.status(SERVER_ERROR).send({ error: 'server error' });
-  });
-
-
-});
-
-// if (data.email) {
-//   console.log("Email already exists!");
-//   alert('Email already exists!');
-//   console.error('Please Change your email address, Thank you!');
-//   return res.send('Email already in use from another customer, Please sign up with another email address.')
-
-// } else if (data.phonenumber) {
-//   console.log("phone numbar already exists!");
-//   alert('phone numbar already exists!');
-//   console.error('Please Change your phonen umbar, Thank you!');
-//   return res.send('phone numbar already in use for another customer, Please sign up with another phone numbar.')
-
-// } else if (data.email && data.phonenumber) {
-//   console.log("Please Change your email and phone number to signup");
-//   alert('Please Change your email and phone number to signup');
-//   console.error('Email & Phone number are already used, Please change them to sign up');
-//   return res.send('Email & Phone number are used for another customer please change them, Thank you!');
-
-// } 
-
-
-// app.get('/', function (req, res) {
-//   res.send('Welcome to thesis MVP')
-// });
-
-// User.findOne({ userEmail: userEmail, phonenumber: phonenumber }).then((data) => {
-//   console.log(data)
-//   if (data.userEmail) {
-//     console.log("Email already exists!");
-//     console.error('Please Change your email address, Thank you!');
-//     return res.send('Email already in use from another customer, Please sign up with another email address.')
-
-//   } else if (data.phonenumber) {
-//     console.log("phone numbar already exists!");
-//     console.error('Please Change your phonen umbar, Thank you!');
-//     return res.send('phone numbar already in use for another customer, Please sign up with another phone numbar.')
-
-//   } else if (data.userEmail && data.phonenumber) {
-//     console.log("Please Change your email and phone number to signup");
-//     console.error('Email & Phone number are already used, Please change them to sign up');
-//     return res.send('Email & Phone number are used for another customer please change them, Thank you!');
-
-// } else {
-//   User.create({
-//     username: username,
-//     userEmail: userEmail,
-//     phonenumber: phonenumber,
-//     password: hashedpass
-//   }).then((tt) => {
-//     console.log('Done, You are succesfully sign up :D');
-//     return res.send({ done: " succesful", tt: tt });
-//   }).catch((err) => {
-//     console.log(err);
-//     return res.status(SERVER_ERROR).send({ error: 'server error' });
-//   });
-// }
-
-
-// });
-// app.get('/', function (req, res) {
-//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
-// });
-
-app.listen(port, () => {
-  console.log('listening on port ' + port + ' Happy Hacking!')
-});
