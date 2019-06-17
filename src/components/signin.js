@@ -1,23 +1,12 @@
 import React from "react";
 import { NavLink } from 'react-router-dom';
 
-// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-// import AppBar from 'material-ui/AppBar';
-// import RaisedButton from 'material-ui/RaisedButton';
-// import TextField from 'material-ui/TextField';
-// import axios from 'axios';
-
-
-
-
-
-class Signincustomer extends React.Component {
+export default class Signincustomer extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       userEmail: "",
-      phoneNumber: "",
       password: ""
     }
   }
@@ -26,6 +15,12 @@ class Signincustomer extends React.Component {
   //   console.log(e.target.value);
   //   this.setState({ [e.target.name]: e.target.value });
   // }
+  handleInputChange = (event) => {
+    const { value, name } = event.target;
+    this.setState({
+      [name]: value
+    });
+  }
 
   clicked() {
     this.setState({
@@ -47,7 +42,28 @@ class Signincustomer extends React.Component {
     });
   }
 
-
+  onSubmit = (event) => {
+    event.preventDefault();
+    fetch('/api/authenticate', {
+      method: 'POST',
+      body: JSON.stringify(this.state),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => {
+      if (res.status === 200) {
+        this.props.history.push('/');
+      } else {
+        const error = new Error(res.error);
+        throw error;
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      alert('Error logging in please try again');
+    });
+  }
   handleUserEmailChange = evt => {
     this.setState({ email: evt.target.value });
     console.log(this.state.email)
@@ -84,65 +100,12 @@ class Signincustomer extends React.Component {
 
     return (
       <div>
-      <div id="logintyle">
-
-        <div class="limiter">
-          <div class="container-login100">
-            <div class="wrap-login100 p-b-160 p-t-50">
-              <form class="login100-form validate-form">
-                <span class="login100-form-title p-b-43">
-                  Account Login
-					</span>
-
-                <div class="wrap-input100 rs1 validate-input" data-validate="Email is required">
-                  <input class="input100"
-                    type="text"
-                    name="email or Number"
-                    value={this.props.userEmail}
-                    onChange={this.handleChange}
-                    // onChange={this.handleUserEmailChange}
-                     />
-                  <span class="label-input100">Username</span>
-                </div>
-
-
-                <div class="wrap-input100 rs2 validate-input" data-validate="Password is required">
-                  <input class="input100" type="password" name="password" 
-                  value={this.props.password}
-                  onChange={this.handleChange}
-
-                  />
-                  <span class="label-input100">Password</span>
-                </div>
-
-                <div class="container-login100-form-btn">
-                  <NavLink to="/Shopnew">
-                    <button class="login100-form-btn"
-                    Click={(event) => {
-                        this.click(event)
-                      }}
-                      onChange={this.handleChange}>
-                      
-                      Sign in
-						</button>
-                  </NavLink>
-                </div>
-
-                <div class="text-center w-full p-t-23">
-                  <a href="/sign-up-customer" class="txt1">
-                    Sign Up ?
-						</a>
-                </div>
-              </form>
-            </div>
-          </div>
+      
         </div>
-        </div></div>
             )
           }
         }
         
-        export default Signincustomer;
 //         {/* STOOoooooooOOOOOOOOOp */}
 //         {/* <body>
 //           <div>

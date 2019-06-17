@@ -6,7 +6,7 @@ const Sequelize = require("sequelize");
 //     dialect: 'mysql',
 // })
 
-const db = new Sequelize("sql7295067", 'sql7295067', '8h14R5EfuH', {
+const db = new Sequelize("sql7295827", 'sql7295827', 'HcpPj6TMcH', {
     host: 'sql7.freemysqlhosting.net',
     dialect: 'mysql',
     pool: {
