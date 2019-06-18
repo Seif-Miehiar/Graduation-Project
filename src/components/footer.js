@@ -23,7 +23,7 @@ class Footer extends React.Component {
 				 <h4>Newsletter</h4>
 				 <p>Aenean sagittis est eget elit pulvinar cursus. Lorem ipsum consectetur adipiscing elit. Phasellus non purus at risus consequat finibus.</p>
 				 <form>					 
-					  <input type="text" className="text" value="Enter Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Email';}"/>
+					  <input type="text" className="text" value="EnterEmail" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Email';}"/>
 					 <input type="submit" value="Subscribe"/>
 					 <div className="clearfix"></div>
 				 </form>			 

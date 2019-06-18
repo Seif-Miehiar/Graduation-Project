@@ -3,10 +3,12 @@ var express = require('express');
 var bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
-const { Address, User } = require("../database/database-models.js");
+const { Address, User, Products } = require("../database/database-models.js");
 const pino = require('express-pino-logger')();
 const path = require('path');
 const cors = require('cors');
+// const withAuth = require('./middleware');
+
 // const SECRET_KEY = "random";
 const SECRET_KEY = process.env.SECRET_KEY || 'somesting';
 
@@ -19,7 +21,7 @@ const saltRounds = 10;
 
 //status codes
 // const UNAUTHORIZED_STATUS = 401;
-const SERVER_ERROR = 500; 
+const SERVER_ERROR = 500;
 const HTTP_CREATED = 201;
 const HTTP_BAD_REQUEST = 400;
 const HTTP_UNAUTHORIZED = 401;
@@ -33,6 +35,49 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 app.use(pino);
+
+
+app.post("/addProducts", (req, res, next) => {
+  console.log(req.body);
+  const { body } = req;
+  const { name, price, image, description } = body;
+  Products.create({
+    name: name,
+    price: price,
+    image: image,
+    description: description
+  }).then(() => {
+    return res.status(HTTP_CREATED).send('product added, Thank you!')
+
+  }).catch((err) => {
+    console.log(err);
+    return res.status(SERVER_ERROR).send(err);
+  })
+})
+
+//get products from database
+app.get('/getproducts', function (req, res) {
+  Products.findAll({}).then((prod) => {
+    return res.send(prod);
+
+  }).catch((err) => {
+    console.log("nnnnnnnnnnnn\n\n\n\n",err, "\n\n\n\n\noooooooooooooooooooo")
+    return res.send(err);
+  })
+ 
+});
+// app.get('/getProducts', (req, res) => {
+//   Products.connect();
+//   Products.query('SELECT * from Products', function(err, rows, fields) {
+//       if (!err) {
+//         res.json(rows);
+//       } else {
+//           console.log('Error while performing Query.');
+//       }
+//   });
+//   Products.end();
+// });
+
 
 //sign up for admin(dispatch)
 app.post('/sign-up-customer', (req, res, next) => {
@@ -57,35 +102,33 @@ app.post('/sign-up-customer', (req, res, next) => {
   })
 });
 
-app.post("/sign-in-customer", function(req, res) {
+app.post("/sign-in-customer", function (req, res) {
   const userEmail = req.body.userEmail;
   const password = req.body.password;
   console.log(password)
   // const newHashedPassword = bcrypt.hashSync(password, saltRounds);
-  
-  
-  User.findOne({where: {userEmail: userEmail}}).then(function(user) {
-    if(!user){
+  User.findOne({ where: { userEmail: userEmail } }).then(function (user) {
+    if (!user) {
       return res.status(HTTP_UNAUTHORIZED).send("Please Sign Up First")
     }
-    if(user){
-      bcrypt.compare(password, user.password).then(function(isMatch){
-        console.log(password, "\n\n\n\n\n\n", user.password, "\n\n\n\n\n\n" )
-        if(isMatch) {
+    if (user) {
+      bcrypt.compare(password, user.password).then(function (isMatch) {
+        console.log(password, "\n\n\n\n\n\n", user.password, "\n\n\n\n\n\n")
+        if (isMatch) {
           console.log("hiiiiiiiiii")
           const token = jwt.sign({
-            userEmail:userEmail
-          }, SECRET_KEY, { expiresIn: 5000})
+            userEmail: userEmail
+          }, SECRET_KEY, { expiresIn: 5000 })
           console.log(" YOU ARE IN, THANKS!")
-          return res.send({token: token})
+          return res.send({ token: token, msg: "ok" })
         } else {
-          return res.status(HTTP_UNAUTHORIZED).send({error: 'Wrong password'});
+          return res.status(HTTP_UNAUTHORIZED).send({ msg: 'Wrong password' });
         }
-      }).catch(function(err){
-        res.status(501).send(err);
+      }).catch(function (err) {
+        res.status(501).send({ msg: "not ok" });
         console.log(err, "Please Sign up first");
 
-})
+      })
     }
   })
 })
@@ -113,8 +156,62 @@ app.post("/register-address", (req, res) => {
 
 });
 
+
+// Not used api
+// app.post('/Auth', function (req, res) {
+//   // const { userEmail, password } = req.body;
+//   const userEmail = req.body.userEmail;
+//   const password = req.body.password;
+//   console.log("mmmmmmmmmmmmmm\n", userEmail, "\n kkkkkkkkkkkkkkkk")
+
+//   User.findOne({where: { userEmail: userEmail }}).then((userAuth) => {
+//     console.log("mmmmmmmmmmmmmm\n", userEmail, "\n kkkkkkkkkkkkkkkk")
+
+
+//     if (!userAuth) {
+//       res.status(401)
+//         .json({
+//           error: 'Incorrect email or password'
+//         });
+//     } else {
+
+//       userAuth.isCorrectPassword(password, function (err, same) {
+//         if (err) {
+//           res.status(500)
+//             .json({
+//               error: 'Internal error please try again'
+//             });
+//         } else if (!same) {
+//           res.status(401)
+//             .json({
+//               error: 'Incorrect email or password'
+//             });
+//         } else {
+//           // Issue token
+//           const payload = { userEmail };
+//           const token = jwt.sign(payload, SECRET_KEY, {
+//             expiresIn: '1h'
+//           });
+//           res.cookie('token', token, { httpOnly: true }).sendStatus(200);
+//         }
+//       });
+//     }
+//   })
+//   .catch(function (err) {
+//     res.status(501).send(err);
+//     console.log(err, "Please Sign up first");
+
+//   })  
+// });
+
+
+app.get('/checkToken', function (req, res) {
+  res.sendStatus(200);
+});
+
 app.listen(port, () => {
   console.log('listening on port ' + port + ' Happy Hacking!')
+
 });
 // if (data.email) {
 //   console.log("Email already exists!");

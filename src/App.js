@@ -15,6 +15,7 @@ import Shoppage from './components/shop';
 import Signincustomer from "./components/signin";
 import Shopnew from "./components/shopnew";
 import Signupcustomer from './components/signup';
+import PrivateRoute from "./components/privaterouter";
 
 // const connection = mysql.createConnection({
 //   host: 'sql7.freemysqlhosting.net',
@@ -71,16 +72,11 @@ class App extends React.Component {
 
       <div>
         <BrowserRouter>
-
-         
-
-
-
           <Route exact path="/welcomepage" component={Welcomepage} />
           <Route exact path="/" component={Welcomepage} />
           <Route exact path="/Shop" component={Shoppage} />
           <Route exact path="/Sign-in-customer" component={Signincustomer} />
-          <Route exact path="/Shopnew" component={Shopnew} />
+          <PrivateRoute exact path="/Shopnew" component={Shopnew} />
           <Route exact path="/sign-up-customer" component={Signupcustomer} />
           
           <Route exact path="/cardlist" component={Cardlist} />

@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from 'react-router-dom';
+// import { Link } from "react-router-dom"
 
 export default class Signincustomer extends React.Component {
   constructor(props) {
@@ -44,19 +45,27 @@ export default class Signincustomer extends React.Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    fetch('/api/authenticate', {
+    console.log("wde")
+    fetch('http://localhost:8080/sign-in-customer', {
       method: 'POST',
       body: JSON.stringify(this.state),
       headers: {
         'Content-Type': 'application/json'
       }
     })
-    .then(res => {
-      if (res.status === 200) {
-        this.props.history.push('/');
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      console.log(res.msg)
+
+      if (res.msg === "ok") {
+        console.log("whatttttttttt")
+        localStorage.setItem("token", res.token)
+        this.props.history.push('/Shopnew');
       } else {
-        const error = new Error(res.error);
-        throw error;
+        console.log("try Again!");
+        
       }
     })
     .catch(err => {
@@ -65,7 +74,7 @@ export default class Signincustomer extends React.Component {
     });
   }
   handleUserEmailChange = evt => {
-    this.setState({ email: evt.target.value });
+    this.setState({ userEmail: evt.target.value });
     console.log(this.state.email)
   };
 
@@ -100,7 +109,27 @@ export default class Signincustomer extends React.Component {
 
     return (
       <div>
-      
+      <form onSubmit={this.onSubmit}>
+        <h1>Login Below!</h1>
+        <input
+          type="email"
+          name="userEmail"
+          placeholder="Enter Email"
+          value={this.state.userEmail}
+          onChange={this.handleInputChange}
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter Password"
+          value={this.state.password}
+          onChange={this.handleInputChange}
+          required
+        /> 
+        
+        <button  onClick={(event) => {this.onSubmit(event)} }>Submit</button>
+      </form>
         </div>
             )
           }

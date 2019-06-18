@@ -19,9 +19,19 @@ const Address = db.define('address', {
     // distance: {type: Sequelize.INTEGER, required: false}
 })
 
+const Products = db.define("products", {
+    id: {type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true},
+    name:{type:Sequelize.STRING, required:true},
+    price:{type:Sequelize.INTEGER, required:true},
+    image:{type:Sequelize.BLOB, required:true},
+    description:{type: Sequelize.STRING, required:true}
+
+})
+
 Address.belongsTo(User); //Add userId foreign key to Place
 // User.hasMany(Place); //Add userId foreign key to Place
 
 
 module.exports.Address = Address;
 module.exports.User = User;
+module.exports.Products = Products
