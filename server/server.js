@@ -7,11 +7,19 @@ const { Address, User, Products } = require("../database/database-models.js");
 const pino = require('express-pino-logger')();
 const path = require('path');
 const cors = require('cors');
+const unirest = require("unirest")
+
 // const withAuth = require('./middleware');
 
 // const SECRET_KEY = "random";
 const SECRET_KEY = process.env.SECRET_KEY || 'somesting';
 
+unirest.get("http://chicken-coop.p.rapidapi.com/games/pc?platform=pc")
+.header("X-RapidAPI-Host", "chicken-coop.p.rapidapi.com")
+.header("X-RapidAPI-Key", "c8261e3e71mshdac602766b8f1bcp1912fdjsnc66655f0414b")
+.end(function (result) {
+  console.log(result, result.headers, result.body);
+});
 
 
 //add sql database
@@ -66,6 +74,7 @@ app.get('/getproducts', function (req, res) {
   })
  
 });
+
 // app.get('/getProducts', (req, res) => {
 //   Products.connect();
 //   Products.query('SELECT * from Products', function(err, rows, fields) {
@@ -76,6 +85,13 @@ app.get('/getproducts', function (req, res) {
 //       }
 //   });
 //   Products.end();
+// });
+
+// app.get("https://chicken-coop.p.rapidapi.com/games/pc?platform=pc")
+// .header("X-RapidAPI-Host", "chicken-coop.p.rapidapi.com")
+// .header("X-RapidAPI-Key", "01047828a3mshc8075394564882dp1b2a5djsn3adb1a57e2a4")
+// .end(function (result) {
+//   console.log(result.status, result.headers, result.body);
 // });
 
 
