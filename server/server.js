@@ -14,12 +14,11 @@ const unirest = require("unirest")
 // const SECRET_KEY = "random";
 const SECRET_KEY = process.env.SECRET_KEY || 'somesting';
 
-unirest.get("http://chicken-coop.p.rapidapi.com/games/pc?platform=pc")
-.header("X-RapidAPI-Host", "chicken-coop.p.rapidapi.com")
-.header("X-RapidAPI-Key", "c8261e3e71mshdac602766b8f1bcp1912fdjsnc66655f0414b")
-.end(function (result) {
-  console.log(result, result.headers, result.body);
-});
+
+
+// unirest.get("https://api.twitch.tv/helix/streams").end(function (result) {
+//   console.log(result);
+// })
 
 
 //add sql database
@@ -44,6 +43,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 app.use(pino);
 
+unirest.get("http://chicken-coop.p.rapidapi.com/games/pc?platform=pc")
+.header("X-RapidAPI-Host", "chicken-coop.p.rapidapi.com")
+.header("X-RapidAPI-Key", "c8261e3e71mshdac602766b8f1bcp1912fdjsnc66655f0414b")
+.end(function (result) {
+  console.log(result, result.headers, result.body);
+});
 
 app.post("/addProducts", (req, res, next) => {
   console.log(req.body);
@@ -227,7 +232,6 @@ app.get('/checkToken', function (req, res) {
 
 app.listen(port, () => {
   console.log('listening on port ' + port + ' Happy Hacking!')
-
 });
 // if (data.email) {
 //   console.log("Email already exists!");

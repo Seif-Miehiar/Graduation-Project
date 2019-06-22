@@ -41,11 +41,11 @@ class Shopnew extends React.Component {
 
     return (
       <div>
-        <Header />
+        {/* <Header /> */}
         
           <div>
             {this.state.products.map((oneProd, i) => {
-              console.log(oneProd)
+              console.log(oneProd.image)
               return (
                 <center><span style={{ padding : "10px 20px"}}>
                 <div style={{ backgroundColor: "#44014C", width: "300px", minHeight: "200px", color: "white"}} key={i}>
@@ -53,6 +53,8 @@ class Shopnew extends React.Component {
                     <h2 style={{ padding: "10px 20px", textAlign: "center", color: "white"}}>
                       {oneProd.name}
                     </h2>
+                    <br></br>
+                    {/* {oneProd.image}  */}
                     <br></br>
                     {oneProd.price}
                     <br></br>
@@ -68,7 +70,7 @@ class Shopnew extends React.Component {
             })}
           </div>
         
-        <Footer />
+        {/* <Footer /> */}
       </div>
     )
   }

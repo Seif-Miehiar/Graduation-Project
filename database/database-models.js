@@ -21,9 +21,10 @@ const Address = db.define('address', {
 
 const Products = db.define("products", {
     id: {type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true},
+    role:{type: Sequelize.STRING, required:true},
     name:{type:Sequelize.STRING, required:true},
     price:{type:Sequelize.INTEGER, required:true},
-    image:{type:Sequelize.BLOB, required:true},
+    image:{type:Sequelize.STRING, required:true},
     description:{type: Sequelize.STRING, required:true}
 
 })
