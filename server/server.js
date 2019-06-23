@@ -43,6 +43,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 app.use(pino);
 
+
+app.get('/', function(req, res){
+  res.redirect('/welcomepage');
+});
+
+
 unirest.get("http://chicken-coop.p.rapidapi.com/games/pc?platform=pc")
 .header("X-RapidAPI-Host", "chicken-coop.p.rapidapi.com")
 .header("X-RapidAPI-Key", "c8261e3e71mshdac602766b8f1bcp1912fdjsnc66655f0414b")
