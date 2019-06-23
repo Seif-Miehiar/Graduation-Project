@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from "./header";
-import Footer from "./footer";
+// import Header from "./header";
+// import Footer from "./footer";
 // import axios from 'axios';
 import unirest from "unirest";
 
@@ -27,7 +27,7 @@ class Welcomepage extends React.Component {
   }
 
   getNewsApi() {
-    let that = this;
+    // let that = this;
 
     unirest.get("https:chicken-coop.p.rapidapi.com/games/pc?platform=pc")
       .header("X-RapidAPI-Host", "chicken-coop.p.rapidapi.com")

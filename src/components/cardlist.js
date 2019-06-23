@@ -1,58 +1,72 @@
 import React from 'react';
-// import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-
 
 class Cardlist extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      cards : [
-        {
-          url : "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(121).jpg",
-          title : "test1"
-        },
-        {
-          url :"https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(96).jpg" ,
-          title : "test2"
-        },
-        {
-          url : "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(45).jpg",
-          title : "test3"
-        }
-      ]
+      cards : [],
+      roleName : "Steam"
 
     }
   }
 
-  render(){
-    return(
-      <div className="row">
-  <div className="col-md-12">
+  componentWillMount() {
+    this.getInfo();
+  }
 
-    <div id="mdb-lightbox-ui"></div>
-
-    <div className="mdb-lightbox no-margin">
-
-      {this.state.cards.map((card) => (
-        <div>
-        <figure className="col-md-4">
-        <a className="black-text" href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(121).jpg"
-          data-size="1600x1067">
-          
-          <h3 className="text-center my-3">{card.title}</h3>
-        </a>
-      </figure></div>
-      )) 
+  getInfo() {
+    fetch('http://localhost:8080/getProducts')
+      .then(response => response.json())
+      .then(card => {
+        console.log(card)
+        this.setState({ cards: card })
       }
+      );
 
-      
+    }
+
+    render(){
+      let that = this
+      return  (
+        <div>
+        {this.state.cards.map((c, i) => {
+
+          if(c.role === that.state.roleName ) {
+
+          return (
+            <div key={i} className="col-md-4 col-xs-6">
+						<div className="shop">
+							<div className="shop-img">
+								<img src={c.image} alt=""/>
+							</div>
+							<div className="shop-body">
+								<h3>Laptop<br/>Collection</h3>
+								<a href="/" className="cta-btn">Shop now <i className="fa fa-arrow-circle-right"></i></a>
+							</div>
+						</div>
+					</div>
+          )
+          }
+
+        })
+        }
+        {/* <div> */}
+           
+          {/* <br></br>
+          <h3> {c.name} </h3>
+          <br></br>
+          <br></br>
+          {c.price}
+          <br></br>
+          {c.description} */} 
+        {/* </div> */}
+        
+        
     </div>
-
-  </div>
-</div>
-
     )
   }
 }
+
 export default Cardlist;
+

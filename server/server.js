@@ -51,19 +51,20 @@ unirest.get("http://chicken-coop.p.rapidapi.com/games/pc?platform=pc")
 });
 
 app.post("/addProducts", (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   const { body } = req;
-  const { name, price, image, description } = body;
+  const { name, price, image, description, role } = body;
   Products.create({
     name: name,
     price: price,
     image: image,
-    description: description
+    description: description,
+    role: role
   }).then(() => {
     return res.status(HTTP_CREATED).send('product added, Thank you!')
 
   }).catch((err) => {
-    console.log(err);
+    // console.log(err);
     return res.status(SERVER_ERROR).send(err);
   })
 })
@@ -74,7 +75,7 @@ app.get('/getproducts', function (req, res) {
     return res.send(prod);
 
   }).catch((err) => {
-    console.log("nnnnnnnnnnnn\n\n\n\n",err, "\n\n\n\n\noooooooooooooooooooo")
+    // console.log("nnnnnnnnnnnn\n\n\n\n",err, "\n\n\n\n\noooooooooooooooooooo")
     return res.send(err);
   })
  

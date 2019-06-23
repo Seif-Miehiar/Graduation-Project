@@ -1,17 +1,23 @@
 import React from "react";
 import Header from "./header";
-import Footer from "./footer";
+// import Footer from "./footer";
+import {
+	//  BrowserRouter as Router,
+	//  Route,
+	  Link } from 'react-router-dom';
+
 
 class Shopnew extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      products: []
-
+      cards : [],
+      roleName : "Random-Home"
 
     }
   }
+
   componentWillMount() {
     this.getInfo();
   }
@@ -19,29 +25,49 @@ class Shopnew extends React.Component {
   getInfo() {
     fetch('http://localhost:8080/getProducts')
       .then(response => response.json())
-      .then(product => {
-        this.setState({ products: product })
-        console.log(product)
+      .then(card => {
+        console.log(card)
+        this.setState({ cards: card })
       }
       );
-    // event.preventDefault();
-    // fetch('http://localhost:8080/getproducts', {
-    //   method: 'GET',
-    //   headers: { "Content-Type": "application/json" }
-    // }).then(response => response.json())
-    //   .then(newData => {
-    //     console.log(newData)
-    //     this.setState({ products: newData })
-    //   });
 
-  }
+		}
+		changeRole(role) {
+			this.setState({roleName : role});
+		}
 
-
-  render() {
-
-    return (
+    render(){
+      let that = this
+      return  (
       <div>
-        <Header />
+        <Header changeRole={this.changeRole.bind(this)} />
+				          {/* <div>
+            {this.state.products.map((oneProd, i) => {
+              console.log(oneProd.image)
+              return (
+                <center><span style={{ padding : "10px 20px"}}>
+                <div style={{ backgroundColor: "#44014C", width: "300px", minHeight: "200px", color: "white"}} key={i}>
+                  <center>
+                    <h2 style={{ padding: "10px 20px", textAlign: "center", color: "white"}}>
+                      {oneProd.name}
+                    </h2>
+                    <br></br> */}
+                    {/* {oneProd.image}  */}
+                    {/* <br></br>
+                    {oneProd.price}
+                    <br></br>
+                    {oneProd.description}
+
+                  </center>
+                </div></span></center>
+
+              )
+
+
+
+            })}
+          </div> */}
+
 
         {/* <!-- SECTION --> */}
 		<div className="section">
@@ -50,45 +76,43 @@ class Shopnew extends React.Component {
 				{/* <!-- row --> */}
 				<div className="row">
 					{/* <!-- shop --> */}
-					<div className="col-md-4 col-xs-6">
-						<div className="shop">
-							<div className="shop-img">
-								<img src="./cssshop/img/shop01.png" alt=""/>
-							</div>
-							<div className="shop-body">
-								<h3>Laptop<br/>Collection</h3>
-								<a href="#" className="cta-btn">Shop now <i className="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div>
-					</div>
-					{/* <!-- /shop --> */}
 
-					{/* <!-- shop --> */}
-					<div className="col-md-4 col-xs-6">
-						<div className="shop">
-							<div className="shop-img">
-								<img src="./cssshop/img/shop03.png" alt=""/>
-							</div>
-							<div className="shop-body">
-								<h3>Accessories<br/>Collection</h3>
-								<a href="#" className="cta-btn">Shop now <i className="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div>
-					</div>
-					{/* <!-- /shop --> */}
 
-					{/* <!-- shop --> */}
-					<div className="col-md-4 col-xs-6">
+
+        {this.state.cards.map((c, i) => {
+					console.log(c.RoleName)
+
+          if(c.role === that.state.roleName ) {
+
+          return (
+            <div key={i} className="col-md-4 col-xs-6">
 						<div className="shop">
 							<div className="shop-img">
-								<img src="./cssshop/img/shop02.png" alt=""/>
+								<img src={c.image} alt=""/>
 							</div>
 							<div className="shop-body">
-								<h3>Cameras<br/>Collection</h3>
-								<a href="#" className="cta-btn">Shop now <i className="fa fa-arrow-circle-right"></i></a>
-							</div>
+								<Link to={c.roleName} onClick={() => this.changeRole(c.roleName)} >
+								<h3>Shop<br/>Now</h3>
+								<a className="cta-btn"><i></i></a>
+								
+								</Link>
+							</div><br></br><center>
+								<h2>{c.name}</h2><br></br>
+								 <br></br>
+								{c.description}
+							{c.name}
+							</center>
 						</div>
 					</div>
+          )
+          }
+
+        })
+        }
+  
+
+
+
 					{/* <!-- /shop --> */}
 				</div>
 				{/* <!-- /row --> */}
@@ -110,10 +134,10 @@ class Shopnew extends React.Component {
 							<h3 className="title">New Products</h3>
 							<div className="section-nav">
 								<ul className="section-tab-nav tab-nav">
-									<li className="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>
-									<li><a data-toggle="tab" href="#tab1">Smartphones</a></li>
-									<li><a data-toggle="tab" href="#tab1">Cameras</a></li>
-									<li><a data-toggle="tab" href="#tab1">Accessories</a></li>
+									<li className="active"><a data-toggle="tab" href="/tab1">Laptops</a></li>
+									<li><a data-toggle="tab" href="/tab1">Smartphones</a></li>
+									<li><a data-toggle="tab" href="/tab1">Cameras</a></li>
+									<li><a data-toggle="tab" href="/tab1">Accessories</a></li>
 								</ul>
 							</div>
 						</div>
@@ -126,7 +150,7 @@ class Shopnew extends React.Component {
 							<div className="products-tabs">
 								{/* <!-- tab --> */}
 								<div id="tab1" className="tab-pane active">
-									<div className="products-slick" data-nav="#slick-nav-1">
+									<div className="products-slick" data-nav="/slick-nav-1">
 										{/* <!-- product --> */}
 										<div className="product">
 											<div className="product-img">
@@ -138,7 +162,7 @@ class Shopnew extends React.Component {
 											</div>
 											<div className="product-body">
 												<p className="product-category">Category</p>
-												<h3 className="product-name"><a href="#">product name goes here</a></h3>
+												<h3 className="product-name"><a href="/">product name goes here</a></h3>
 												<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 												<div className="product-rating">
 													<i className="fa fa-star"></i>
@@ -169,7 +193,7 @@ class Shopnew extends React.Component {
 											</div>
 											<div className="product-body">
 												<p className="product-category">Category</p>
-												<h3 className="product-name"><a href="#">product name goes here</a></h3>
+												<h3 className="product-name"><a href="/">product name goes here</a></h3>
 												<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 												<div className="product-rating">
 													<i className="fa fa-star"></i>
@@ -200,7 +224,7 @@ class Shopnew extends React.Component {
 											</div>
 											<div className="product-body">
 												<p className="product-category">Category</p>
-												<h3 className="product-name"><a href="#">product name goes here</a></h3>
+												<h3 className="product-name"><a href="/">product name goes here</a></h3>
 												<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 												<div className="product-rating">
 												</div>
@@ -223,7 +247,7 @@ class Shopnew extends React.Component {
 											</div>
 											<div className="product-body">
 												<p className="product-category">Category</p>
-												<h3 className="product-name"><a href="#">product name goes here</a></h3>
+												<h3 className="product-name"><a href="/">product name goes here</a></h3>
 												<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 												<div className="product-rating">
 													<i className="fa fa-star"></i>
@@ -251,7 +275,7 @@ class Shopnew extends React.Component {
 											</div>
 											<div className="product-body">
 												<p className="product-category">Category</p>
-												<h3 className="product-name"><a href="#">product name goes here</a></h3>
+												<h3 className="product-name"><a href="/">product name goes here</a></h3>
 												<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 												<div className="product-rating">
 													<i className="fa fa-star"></i>
@@ -322,7 +346,7 @@ class Shopnew extends React.Component {
 							</ul>
 							<h2 className="text-uppercase">hot deal this week</h2>
 							<p>New Collection Up to 50% OFF</p>
-							<a className="primary-btn cta-btn" href="#">Shop now</a>
+							<a className="primary-btn cta-btn" href="/">Shop now</a>
 						</div>
 					</div>
 				</div>
@@ -345,10 +369,10 @@ class Shopnew extends React.Component {
 							<h3 className="title">Top selling</h3>
 							<div className="section-nav">
 								<ul className="section-tab-nav tab-nav">
-									<li className="active"><a data-toggle="tab" href="#tab2">Laptops</a></li>
-									<li><a data-toggle="tab" href="#tab2">Smartphones</a></li>
-									<li><a data-toggle="tab" href="#tab2">Cameras</a></li>
-									<li><a data-toggle="tab" href="#tab2">Accessories</a></li>
+									<li className="active"><a data-toggle="tab" href="/tab2">Laptops</a></li>
+									<li><a data-toggle="tab" href="/tab2">Smartphones</a></li>
+									<li><a data-toggle="tab" href="/tab2">Cameras</a></li>
+									<li><a data-toggle="tab" href="/tab2">Accessories</a></li>
 								</ul>
 							</div>
 						</div>
@@ -361,7 +385,7 @@ class Shopnew extends React.Component {
 							<div className="products-tabs">
 								{/* <!-- tab --> */}
 								<div id="tab2" className="tab-pane fade in active">
-									<div className="products-slick" data-nav="#slick-nav-2">
+									<div className="products-slick" data-nav="/slick-nav-2">
 										{/* <!-- product --> */}
 										<div className="product">
 											<div className="product-img">
@@ -373,7 +397,7 @@ class Shopnew extends React.Component {
 											</div>
 											<div className="product-body">
 												<p className="product-category">Category</p>
-												<h3 className="product-name"><a href="#">product name goes here</a></h3>
+												<h3 className="product-name"><a href="/">product name goes here</a></h3>
 												<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 												<div className="product-rating">
 													<i className="fa fa-star"></i>
@@ -404,7 +428,7 @@ class Shopnew extends React.Component {
 											</div>
 											<div className="product-body">
 												<p className="product-category">Category</p>
-												<h3 className="product-name"><a href="#">product name goes here</a></h3>
+												<h3 className="product-name"><a href="/">product name goes here</a></h3>
 												<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 												<div className="product-rating">
 													<i className="fa fa-star"></i>
@@ -435,7 +459,7 @@ class Shopnew extends React.Component {
 											</div>
 											<div className="product-body">
 												<p className="product-category">Category</p>
-												<h3 className="product-name"><a href="#">product name goes here</a></h3>
+												<h3 className="product-name"><a href="/">product name goes here</a></h3>
 												<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 												<div className="product-rating">
 												</div>
@@ -458,7 +482,7 @@ class Shopnew extends React.Component {
 											</div>
 											<div className="product-body">
 												<p className="product-category">Category</p>
-												<h3 className="product-name"><a href="#">product name goes here</a></h3>
+												<h3 className="product-name"><a href="/">product name goes here</a></h3>
 												<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 												<div className="product-rating">
 													<i className="fa fa-star"></i>
@@ -486,7 +510,7 @@ class Shopnew extends React.Component {
 											</div>
 											<div className="product-body">
 												<p className="product-category">Category</p>
-												<h3 className="product-name"><a href="#">product name goes here</a></h3>
+												<h3 className="product-name"><a href="/">product name goes here</a></h3>
 												<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 												<div className="product-rating">
 													<i className="fa fa-star"></i>
@@ -535,7 +559,7 @@ class Shopnew extends React.Component {
 							</div>
 						</div>
 
-						<div className="products-widget-slick" data-nav="#slick-nav-3">
+						<div className="products-widget-slick" data-nav="/slick-nav-3">
 							<div>
 								{/* <!-- product widget --> */}
 								<div className="product-widget">
@@ -544,7 +568,7 @@ class Shopnew extends React.Component {
 									</div>
 									<div className="product-body">
 										<p className="product-category">Category</p>
-										<h3 className="product-name"><a href="#">product name goes here</a></h3>
+										<h3 className="product-name"><a href="/">product name goes here</a></h3>
 										<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
@@ -557,7 +581,7 @@ class Shopnew extends React.Component {
 									</div>
 									<div className="product-body">
 										<p className="product-category">Category</p>
-										<h3 className="product-name"><a href="#">product name goes here</a></h3>
+										<h3 className="product-name"><a href="/">product name goes here</a></h3>
 										<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
@@ -570,7 +594,7 @@ class Shopnew extends React.Component {
 									</div>
 									<div className="product-body">
 										<p className="product-category">Category</p>
-										<h3 className="product-name"><a href="#">product name goes here</a></h3>
+										<h3 className="product-name"><a href="/">product name goes here</a></h3>
 										<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
@@ -585,7 +609,7 @@ class Shopnew extends React.Component {
 									</div>
 									<div className="product-body">
 										<p className="product-category">Category</p>
-										<h3 className="product-name"><a href="#">product name goes here</a></h3>
+										<h3 className="product-name"><a href="/">product name goes here</a></h3>
 										<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
@@ -598,7 +622,7 @@ class Shopnew extends React.Component {
 									</div>
 									<div className="product-body">
 										<p className="product-category">Category</p>
-										<h3 className="product-name"><a href="#">product name goes here</a></h3>
+										<h3 className="product-name"><a href="/">product name goes here</a></h3>
 										<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
@@ -611,7 +635,7 @@ class Shopnew extends React.Component {
 									</div>
 									<div className="product-body">
 										<p className="product-category">Category</p>
-										<h3 className="product-name"><a href="#">product name goes here</a></h3>
+										<h3 className="product-name"><a href="/">product name goes here</a></h3>
 										<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
@@ -628,7 +652,7 @@ class Shopnew extends React.Component {
 							</div>
 						</div>
 
-						<div className="products-widget-slick" data-nav="#slick-nav-4">
+						<div className="products-widget-slick" data-nav="/slick-nav-4">
 							<div>
 								{/* <!-- product widget --> */}
 								<div className="product-widget">
@@ -637,7 +661,7 @@ class Shopnew extends React.Component {
 									</div>
 									<div className="product-body">
 										<p className="product-category">Category</p>
-										<h3 className="product-name"><a href="#">product name goes here</a></h3>
+										<h3 className="product-name"><a href="/">product name goes here</a></h3>
 										<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
@@ -650,7 +674,7 @@ class Shopnew extends React.Component {
 									</div>
 									<div className="product-body">
 										<p className="product-category">Category</p>
-										<h3 className="product-name"><a href="#">product name goes here</a></h3>
+										<h3 className="product-name"><a href="/">product name goes here</a></h3>
 										<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
@@ -663,7 +687,7 @@ class Shopnew extends React.Component {
 									</div>
 									<div className="product-body">
 										<p className="product-category">Category</p>
-										<h3 className="product-name"><a href="#">product name goes here</a></h3>
+										<h3 className="product-name"><a href="/">product name goes here</a></h3>
 										<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
@@ -678,7 +702,7 @@ class Shopnew extends React.Component {
 									</div>
 									<div className="product-body">
 										<p className="product-category">Category</p>
-										<h3 className="product-name"><a href="#">product name goes here</a></h3>
+										<h3 className="product-name"><a href="/">product name goes here</a></h3>
 										<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
@@ -691,7 +715,7 @@ class Shopnew extends React.Component {
 									</div>
 									<div className="product-body">
 										<p className="product-category">Category</p>
-										<h3 className="product-name"><a href="#">product name goes here</a></h3>
+										<h3 className="product-name"><a href="/">product name goes here</a></h3>
 										<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
@@ -704,7 +728,7 @@ class Shopnew extends React.Component {
 									</div>
 									<div className="product-body">
 										<p className="product-category">Category</p>
-										<h3 className="product-name"><a href="#">product name goes here</a></h3>
+										<h3 className="product-name"><a href="/">product name goes here</a></h3>
 										<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
@@ -723,7 +747,7 @@ class Shopnew extends React.Component {
 							</div>
 						</div>
 
-						<div className="products-widget-slick" data-nav="#slick-nav-5">
+						<div className="products-widget-slick" data-nav="/slick-nav-5">
 							<div>
 								{/* <!-- product widget --> */}
 								<div className="product-widget">
@@ -732,7 +756,7 @@ class Shopnew extends React.Component {
 									</div>
 									<div className="product-body">
 										<p className="product-category">Category</p>
-										<h3 className="product-name"><a href="#">product name goes here</a></h3>
+										<h3 className="product-name"><a href="/">product name goes here</a></h3>
 										<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
@@ -745,7 +769,7 @@ class Shopnew extends React.Component {
 									</div>
 									<div className="product-body">
 										<p className="product-category">Category</p>
-										<h3 className="product-name"><a href="#">product name goes here</a></h3>
+										<h3 className="product-name"><a href="/">product name goes here</a></h3>
 										<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
@@ -758,7 +782,7 @@ class Shopnew extends React.Component {
 									</div>
 									<div className="product-body">
 										<p className="product-category">Category</p>
-										<h3 className="product-name"><a href="#">product name goes here</a></h3>
+										<h3 className="product-name"><a href="/">product name goes here</a></h3>
 										<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
@@ -773,7 +797,7 @@ class Shopnew extends React.Component {
 									</div>
 									<div className="product-body">
 										<p className="product-category">Category</p>
-										<h3 className="product-name"><a href="#">product name goes here</a></h3>
+										<h3 className="product-name"><a href="/">product name goes here</a></h3>
 										<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
@@ -786,7 +810,7 @@ class Shopnew extends React.Component {
 									</div>
 									<div className="product-body">
 										<p className="product-category">Category</p>
-										<h3 className="product-name"><a href="#">product name goes here</a></h3>
+										<h3 className="product-name"><a href="/">product name goes here</a></h3>
 										<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
@@ -799,7 +823,7 @@ class Shopnew extends React.Component {
 									</div>
 									<div className="product-body">
 										<p className="product-category">Category</p>
-										<h3 className="product-name"><a href="#">product name goes here</a></h3>
+										<h3 className="product-name"><a href="/">product name goes here</a></h3>
 										<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
@@ -819,24 +843,24 @@ class Shopnew extends React.Component {
 
 
 
-    {this.state.products.map((prodo, i) => {
+    {/* {this.state.products.map((prodo, i) => {
             
             return (
               <div>
 
               </div>
             )
-          })}
+          })} */}
 
 
 
 
-          <div>
+          {/* <div> */}
             {/* {this.state.products.map((oneProd, i) => {
               console.log(oneProd.image)
               return (
                 <center><span style={{ padding : "10px 20px"}}>
-                <div style={{ backgroundColor: "#44014C", width: "300px", minHeight: "200px", color: "white"}} key={i}>
+                <div style={{ backgroundColor: "/44014C", width: "300px", minHeight: "200px", color: "white"}} key={i}>
                   <center>
                     <h2 style={{ padding: "10px 20px", textAlign: "center", color: "white"}}>
                       {oneProd.name}
@@ -856,7 +880,7 @@ class Shopnew extends React.Component {
 
 
             })} */}
-          </div>
+          {/* </div> */}
         
         {/* <Footer /> */}
       </div>

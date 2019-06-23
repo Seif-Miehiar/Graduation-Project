@@ -45,7 +45,8 @@ class Header extends React.Component {
 						<div className="col-md-3">
 							<div className="header-logo">
 								<a href="/" className="logo">
-									<img src="./img/logo.png" alt=""/>
+									{/* <img src="./cssshop/img/logo.png" alt=""/> */}
+									<h1> iPlay </h1>
 								</a>
 							</div>
 						</div>
@@ -82,11 +83,12 @@ class Header extends React.Component {
 
 								{/* <!-- Cart --> */}
 								<div className="dropdown">
+								<Link exact to="/Shoppingcart" >
 									<a className="dropdown-toggle" href="/" data-toggle="dropdown" aria-expanded="true">
 										<i className="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
 										<div className="qty">3</div>
-									</a>
+									</a></Link>
 									<div className="cart-dropdown">
 										<div className="cart-list">
 											<div className="product-widget">
@@ -141,6 +143,7 @@ class Header extends React.Component {
 			</div>
 			{/* <!-- /MAIN HEADER --> */}
 		</header>
+		
 		{/* <!-- /HEADER --></div> */}
 		{/* <!-- NAVIGATION --> */}
 		<nav id="navigation">
@@ -150,13 +153,13 @@ class Header extends React.Component {
 				<div id="responsive-nav">
 					{/* <!-- NAV --> */}
 					<ul class="main-nav nav navbar-nav">
-						<li><a href="/">Home</a></li>
-						<li class="active"><a href="/">Hot Deals</a></li>
-						<li><a href="/">Categories</a></li>
-						<li><a href="/">Laptops</a></li>
-						<li><a href="/">Smartphones</a></li>
-						<li><a href="/">Cameras</a></li>
-						<li><a href="/">Accessories</a></li>
+						<li onClick={() => this.props.changeRole("Random-Home")}><a>Home</a></li>
+						<li onClick={() => this.props.changeRole("Steam")}><a>Steam</a></li>
+						<li onClick={() => this.props.changeRole("PSN")}><a>PSN</a></li>
+						<li onClick={() => this.props.changeRole("GooglePlay")}><a>Google Play</a></li>
+						<li onClick={() => this.props.changeRole("iTunes")}><a>iTunes</a></li>
+						<li onClick={() => this.props.changeRole("Xbox")}><a>Xbox</a></li>
+						<li onClick={() => this.props.changeRole("Amazon")}><a>Amazon</a></li>
 					</ul>
 					{/* <!-- /NAV --> */}
 				</div>
