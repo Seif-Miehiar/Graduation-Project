@@ -118,7 +118,9 @@ class Header extends React.Component {
 											<h5>SUBTOTAL: $2940.00</h5>
 										</div>
 										<div className="cart-btns">
-											<a href="/">View Cart</a>
+											<Link to="/Shoppingcart">
+											<Link>View Cart</Link>
+											</Link>
 											<a href="/">Checkout  <i className="fa fa-arrow-circle-right"></i></a>
 										</div>
 									</div>
@@ -153,13 +155,13 @@ class Header extends React.Component {
 				<div id="responsive-nav">
 					{/* <!-- NAV --> */}
 					<ul class="main-nav nav navbar-nav">
-						<li onClick={() => this.props.changeRole("Random-Home")}><a>Home</a></li>
-						<li onClick={() => this.props.changeRole("Steam")}><a>Steam</a></li>
-						<li onClick={() => this.props.changeRole("PSN")}><a>PSN</a></li>
-						<li onClick={() => this.props.changeRole("GooglePlay")}><a>Google Play</a></li>
-						<li onClick={() => this.props.changeRole("iTunes")}><a>iTunes</a></li>
-						<li onClick={() => this.props.changeRole("Xbox")}><a>Xbox</a></li>
-						<li onClick={() => this.props.changeRole("Amazon")}><a>Amazon</a></li>
+						<li onClick={() => this.props.changeRole("Random-Home")}><Link>Home</Link></li>
+						<li onClick={() => this.props.changeRole("Steam")}><Link>Steam</Link></li>
+						<li onClick={() => this.props.changeRole("PSN")}><Link>PSN</Link></li>
+						<li onClick={() => this.props.changeRole("GooglePlay")}><Link>Google Play</Link></li>
+						<li onClick={() => this.props.changeRole("iTunes")}><Link>iTunes</Link></li>
+						<li onClick={() => this.props.changeRole("Xbox")}><Link>Xbox</Link></li>
+						<li onClick={() => this.props.changeRole("Amazon")}><Link>Amazon</Link></li>
 					</ul>
 					{/* <!-- /NAV --> */}
 				</div>

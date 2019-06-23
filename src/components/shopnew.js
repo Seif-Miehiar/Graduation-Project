@@ -85,7 +85,7 @@ class Shopnew extends React.Component {
           if(c.role === that.state.roleName ) {
 
           return (
-            <div key={i} className="col-md-4 col-xs-6">
+            <div  key={i} className="col-md-4 col-xs-6">
 						<div className="shop">
 							<div className="shop-img">
 								<img src={c.image} alt=""/>
