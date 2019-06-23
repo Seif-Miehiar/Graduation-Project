@@ -695,12 +695,12 @@ textarea.input {
 
 .shop .shop-img {
   position: relative;
-  background-color: #E4E7ED;
+  background-color: #FFF;
   z-index: -1;
 }
 
 .shop .shop-img>img {
-  width: 100%;
+  width: 75%;
   -webkit-transition: 0.2s all;
   transition: 0.2s all;
 }

@@ -34,7 +34,7 @@ const HTTP_BAD_REQUEST = 400;
 const HTTP_UNAUTHORIZED = 401;
 const HTTP_SERVER_ERROR = 500;
 
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static('../build'));
 app.use(express.json())
 
 app.use(cors())
@@ -45,7 +45,7 @@ app.use(pino);
 
 
 app.get('/', function(req, res){
-  res.redirect('/welcomepage');
+  res.send("index.html");
 });
 
 
@@ -177,7 +177,7 @@ app.post("/register-address", (req, res) => {
     console.log('Done, You are succesfully sign up :D');
     return res.send({ done: " succesful", tt: tt });
   }).catch((err) => {
-    console.log(err);
+    console.log(err, "\n\n\n\n\n\n\nhhhhhhhhhhhhh");
     return res.status(SERVER_ERROR).send({ error: 'server error' });
   });
 

@@ -80,9 +80,9 @@ class Shopnew extends React.Component {
 
 
         {this.state.cards.map((c, i) => {
-					console.log(c.RoleName)
+					
 
-          if(c.role === that.state.roleName ) {
+          if(c.role === that.state.roleName  ) {
 
           return (
             <div  key={i} className="col-md-4 col-xs-6">
@@ -96,16 +96,38 @@ class Shopnew extends React.Component {
 								<a className="cta-btn"><i></i></a>
 								
 								</Link>
-							</div><br></br><center>
+							</div>
+							<br></br>
 								<h2>{c.name}</h2><br></br>
-								 <br></br>
+								 
 								{c.description}
 							{c.name}
-							</center>
+							
 						</div>
 					</div>
           )
-          }
+          } 
+					{/* else if ( c.role === "Random-Home" ) { */}
+						{/* return (
+							<div key={i} className="col-md-4 col-xs-6">
+						<div className="shop">
+							<div className="shop-img">
+								<img src={c.image} alt=""/>
+							</div>
+							<div className="shop-body">
+								<Link to={c.roleName} onClick={() => this.changeRole(c.roleName)} >
+								<h3>Shop<br/>Now</h3>
+								<a className="cta-btn"><i></i></a>
+								
+								</Link>
+							</div>
+								 
+								
+							
+						</div>
+					</div>
+						)
+					} */}
 
         })
         }
