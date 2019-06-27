@@ -29,6 +29,16 @@ const Products = db.define("products", {
 
 })
 
+const Carts = db.define("cart", {
+    itemId: {type: Sequelize.BIGINT, autoIncrement: true, primaryKey: true},
+    itemName: {type: Sequelize.STRING},
+    itemImage: {type: Sequelize.STRING },
+    quantity: {type: Sequelize.INTEGER},
+    itemDescription: {type:Sequelize.STRING},
+    price: {type : Sequelize.INTEGER},
+    availableQuantity : { type: Sequelize.INTEGER}
+})
+
 Address.belongsTo(User); //Add userId foreign key to Place
 // User.hasMany(Place); //Add userId foreign key to Place
 
@@ -36,3 +46,4 @@ Address.belongsTo(User); //Add userId foreign key to Place
 module.exports.Address = Address;
 module.exports.User = User;
 module.exports.Products = Products
+module.exports.Carts = Carts;

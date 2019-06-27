@@ -83,7 +83,7 @@ class Header extends React.Component {
 
 								{/* <!-- Cart --> */}
 								<div className="dropdown">
-								<Link exact to="/Shoppingcart" >
+								<Link to="/Shoppingcart" >
 									<a className="dropdown-toggle" href="/" data-toggle="dropdown" aria-expanded="true">
 										<i className="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
@@ -119,7 +119,7 @@ class Header extends React.Component {
 										</div>
 										<div className="cart-btns">
 											<Link to="/Shoppingcart">
-											<Link>View Cart</Link>
+											View Cart
 											</Link>
 											<a href="/">Checkout  <i className="fa fa-arrow-circle-right"></i></a>
 										</div>
@@ -150,11 +150,11 @@ class Header extends React.Component {
 		{/* <!-- NAVIGATION --> */}
 		<nav id="navigation">
 			{/* <!-- container --> */}
-			<div class="container">
+			<div className="container">
 				{/* <!-- responsive-nav --> */}
 				<div id="responsive-nav">
 					{/* <!-- NAV --> */}
-					<ul class="main-nav nav navbar-nav">
+					<ul className="main-nav nav navbar-nav">
 						<li onClick={() => this.props.changeRole("Random-Home")}><Link>Home</Link></li>
 						<li onClick={() => this.props.changeRole("Steam")}><Link>Steam</Link></li>
 						<li onClick={() => this.props.changeRole("PSN")}><Link>PSN</Link></li>
@@ -171,7 +171,7 @@ class Header extends React.Component {
 		</nav>
 		{/* <!-- /NAVIGATION --> */}
 
-{/* <div className="banner banner2">
+{/* <div classNameName="banner banner2">
 	 <div className="container">
 		 <div className="headr-right">
 				<div className="details">
