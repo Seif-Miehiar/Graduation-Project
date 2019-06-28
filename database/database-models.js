@@ -36,7 +36,8 @@ const Carts = db.define("cart", {
     quantity: {type: Sequelize.INTEGER},
     itemDescription: {type:Sequelize.STRING},
     price: {type : Sequelize.INTEGER},
-    availableQuantity : { type: Sequelize.INTEGER}
+    availableQuantity : { type: Sequelize.INTEGER},
+    userEmail: {type:Sequelize.STRING}
 })
 
 Address.belongsTo(User); //Add userId foreign key to Place

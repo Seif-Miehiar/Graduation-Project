@@ -15,7 +15,7 @@ class Cardlist extends React.Component {
     this.getInfo();
   }
 
-  getInfo() {
+  getInfo() { 
     fetch('http://localhost:8080/getProducts')
       .then(response => response.json())
       .then(card => {

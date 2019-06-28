@@ -62,6 +62,8 @@ export default class Signincustomer extends React.Component {
       if (res.msg === "ok") {
         console.log("whatttttttttt")
         localStorage.setItem("token", res.token)
+        localStorage.setItem("userEmail", this.state.userEmail)
+
         this.props.history.push('/Shopnew');
       } else {
         console.log("try Again!");

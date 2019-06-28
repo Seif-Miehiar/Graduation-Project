@@ -86,7 +86,7 @@ class Header extends React.Component {
 								<Link to="/Shoppingcart" >
 									<a className="dropdown-toggle" href="/" data-toggle="dropdown" aria-expanded="true">
 										<i className="fa fa-shopping-cart"></i>
-										<span>Your Cart</span>
+											 <span>Your Cart</span>
 										<div className="qty">3</div>
 									</a></Link>
 									<div className="cart-dropdown">

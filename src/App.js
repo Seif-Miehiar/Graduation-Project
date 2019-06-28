@@ -17,6 +17,7 @@ import Shopnew from "./components/shopnew";
 import Signupcustomer from './components/signup';
 import PrivateRoute from "./components/privaterouter";
 import Shoppingcart from "./components/shoppingcart"
+import ProductItem from "./components/shoppingcart";
 
 // const connection = mysql.createConnection({
 //   host: 'sql7.freemysqlhosting.net',
@@ -81,6 +82,8 @@ class App extends React.Component {
           <PrivateRoute exact path="/Shopnew" component={Shopnew} />
           <PrivateRoute exact path="/Shoppingcart" component={Shoppingcart} />
           <PrivateRoute exact path="/cardlist" component={Cardlist} />
+          <PrivateRoute exact path="/productItem" component={ProductItem} />
+
         </BrowserRouter>
         
       </div>

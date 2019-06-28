@@ -76,6 +76,7 @@ app.post("/send-items-to-data", (req, res) => {
  const itemImage = req.body.itemImage;
  const itemName = req.body.itemName;
  const price = req.body.price;
+ const userEmail = req.body.userEmail
 
 
   Carts.create({
@@ -85,7 +86,8 @@ app.post("/send-items-to-data", (req, res) => {
     quantity: null,
     itemDescription: null,
     price: price,
-    availableQuantity: null
+    availableQuantity: null,
+    userEmail: userEmail
   }).then(() => {
     return res.status(HTTP_CREATED).send('product added, Thank you!')
   }).catch((err) => {
@@ -94,8 +96,26 @@ app.post("/send-items-to-data", (req, res) => {
   })
 })
 
+app.get("/render-cart", (req, res) => {
+  const userEmail = req.query.userEmail
+  console.log("oooooooooo\n\n\n\n", req.query.userEmail , "\n\n\n\noooooooooo")
+  Carts.findAll({where:{userEmail : userEmail}}).then((item) => {
+    return res.send(item);
+  }).catch((err) => {
+    console.log(err);
+    return res.send(err);
+  })
+})
 
 
+app.get('/getproducts', function (req, res) {
+  Products.findAll({}).then((prod) => {
+    return res.send(prod);
+  }).catch((err) => {
+    // console.log("nnnnnnnnnnnn\n\n\n\n",err, "\n\n\n\n\noooooooooooooooooooo")
+    return res.send(err);
+  })
+});
 
 //POSTING TO CART!
 // app.post("/cart", (req, res) => {
@@ -115,14 +135,6 @@ app.post("/send-items-to-data", (req, res) => {
 //   return res.json(cartProducts);
 // })
 //get products from database
-app.get('/getproducts', function (req, res) {
-  Products.findAll({}).then((prod) => {
-    return res.send(prod);
-  }).catch((err) => {
-    // console.log("nnnnnnnnnnnn\n\n\n\n",err, "\n\n\n\n\noooooooooooooooooooo")
-    return res.send(err);
-  })
-});
 //generates the list of products in the cart
 // app.post('/api/products', (req, res) => { 
 //   let products = [], id = null;

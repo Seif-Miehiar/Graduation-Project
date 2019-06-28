@@ -53,17 +53,18 @@ class Shopnew extends React.Component {
 			let data = {
 				itemName: this.state.itemName,
 				itemImage: this.state.itemImage,
-				price: this.state.price
+				price: this.state.price,
+				userEmail : localStorage.getItem("userEmail")
 			}
 			console.log(data);
 			fetch('/send-items-to-data', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: { 
-        "Content-Type": "application/json",
-        'Accept': 'application/json'
-      }
-    })
+				method: 'POST',
+				body: JSON.stringify(data),
+				headers: {
+					"Content-Type": "application/json",
+					'Accept': 'application/json'
+				}
+			})
 
 		})
 	}
