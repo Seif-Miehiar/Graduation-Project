@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.js": "/iplay/static/js/main.007f21f5.chunk.js",
+    "main.js.map": "/iplay/static/js/main.007f21f5.chunk.js.map",
+    "runtime~main.js": "/iplay/static/js/runtime~main.b5915918.js",
+    "runtime~main.js.map": "/iplay/static/js/runtime~main.b5915918.js.map",
+    "static/js/2.58251013.chunk.js": "/iplay/static/js/2.58251013.chunk.js",
+    "static/js/2.58251013.chunk.js.map": "/iplay/static/js/2.58251013.chunk.js.map",
+    "index.html": "/iplay/index.html",
+    "precache-manifest.797f708ec8d6c431c67a5a2057153e96.js": "/iplay/precache-manifest.797f708ec8d6c431c67a5a2057153e96.js",
+    "service-worker.js": "/iplay/service-worker.js"
+  }
+}
