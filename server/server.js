@@ -30,7 +30,7 @@ const HTTP_UNAUTHORIZED = 401;
 const HTTP_SERVER_ERROR = 500;
 
 // app.use(express.static('../build'));
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, '../build')));
 
 app.use(express.json())
 
