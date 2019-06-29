@@ -61,5 +61,17 @@
     "standard": "^12.0.1"
   },
   "proxy": "http://localhost:8080",
-  "homepage": "http://Seif-Miehiar.github.io/iplay"
+  "homepage": "http://Seif-Miehiar.github.io/iplay",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Seif-Miehiar/Graduation-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Seif-Miehiar/Graduation-Project/issues"
+  }
 }

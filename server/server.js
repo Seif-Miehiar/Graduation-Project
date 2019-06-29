@@ -11,6 +11,8 @@ const SECRET_KEY = process.env.SECRET_KEY || 'somesting';
 const { db } = require("../database/seq")
 console.log(db)
 const path = require('path');
+const http = require('http');
+
 // const SECRET_KEY = "random";
 
 
@@ -30,7 +32,9 @@ const HTTP_UNAUTHORIZED = 401;
 const HTTP_SERVER_ERROR = 500;
 
 // app.use(express.static('../build'));
-app.use(express.static(path.join(__dirname, '../build')));
+// app.use(express.static(path.join(__dirname, '../build')));
+// app.use("../build/index.html", express.static('../build/index.html'));
+app.use('/static', express.static(path.join(__dirname, '../build//static')));
 
 app.use(express.json())
 
@@ -39,9 +43,16 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 app.use(pino);
 // app.use(express.static(path.join(__dirname, '')));
+app.set('port', process.env.PORT || 8080);
+app.set('host', process.env.HOST || '0.0.0.0');
+
+http.createServer(app).listen(app.get('port'), app.get('host'), function(){
+  console.log("Express server listening on port " + app.get('port'));
+});
 
 
 app.get('/', function (req, res) {
+  // res.send(JSON.stringify(../build/index.html))
   res.send("index.html");
 });
 
@@ -241,7 +252,7 @@ app.get('/checkToken', function (req, res) {
   res.sendStatus(200);
 });
 
-const server = app.listen(process.env.PORT || port, () => {
-  const port = server.address().port;
-  console.log('listening on port ' + port + ' Happy Hacking!')
-});
+// const server = app.listen(process.env.PORT || port, () => {
+//   const port = server.address().port;
+//   console.log('listening on port ' + port + ' Happy Hacking!')
+// });
