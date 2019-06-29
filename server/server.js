@@ -10,7 +10,7 @@ const unirest = require("unirest")
 const SECRET_KEY = process.env.SECRET_KEY || 'somesting';
 const { db } = require("../database/seq")
 console.log(db)
-// const path = require('path');
+const path = require('path');
 // const SECRET_KEY = "random";
 
 
@@ -19,7 +19,7 @@ console.log(db)
 
 //add sql database
 const app = express();
-const port = process.env.PORT || 8080
+const port = 8080
 const saltRounds = 10;
 
 //status codes
@@ -29,7 +29,9 @@ const HTTP_BAD_REQUEST = 400;
 const HTTP_UNAUTHORIZED = 401;
 const HTTP_SERVER_ERROR = 500;
 
-app.use(express.static('../build'));
+// app.use(express.static('../build'));
+app.use(express.static(path.join(__dirname, 'build')));
+
 app.use(express.json())
 
 app.use(cors())
@@ -239,6 +241,7 @@ app.get('/checkToken', function (req, res) {
   res.sendStatus(200);
 });
 
-app.listen(port, () => {
+const server = app.listen(process.env.PORT || port, () => {
+  const port = server.address().port;
   console.log('listening on port ' + port + ' Happy Hacking!')
 });
