@@ -1,6 +1,53 @@
-import React from "react";
-import { NavLink } from 'react-router-dom';
-// import { Link } from "react-router-dom"
+import React from 'react';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+
+function MadeWithLove() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Built with love by the '}
+      <Link color="inherit" href="https://material-ui.com/">
+        Material-UI
+      </Link>
+      {' team.'}
+    </Typography>
+  );
+}
+const useStyles = makeStyles(theme => ({
+  '@global': {
+    body: {
+      backgroundColor: theme.palette.common.white,
+    },
+  },
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 
 export default class Signincustomer extends React.Component {
   constructor(props) {
@@ -108,140 +155,98 @@ export default class Signincustomer extends React.Component {
     // var isEnabled = userEmail.length > 0 && password.length > 0;
 
 
+    const classes = useStyles();
 
     return (
       <div>
-      <form onSubmit={this.onSubmit}>
-        <h1>Login Below!</h1>
-        <input
-          type="email"
-          name="userEmail"
-          placeholder="Enter Email"
-          value={this.state.userEmail}
-          onChange={this.handleInputChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter Password"
-          value={this.state.password}
-          onChange={this.handleInputChange}
-          required
-        /> 
-        
-        <button  onClick={(event) => {this.onSubmit(event)} }>Submit</button>
-      </form>
+<Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          {/* <LockOutlinedIcon /> */}
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+        <form className={classes.form} noValidate>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+          />
+          <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="Remember me"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Sign In
+          </Button>
+          <Grid container>
+            <Grid item xs>
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link href="#" variant="body2">
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+          </Grid>
+        </form>
+      </div>
+      <Box mt={5}>
+        <MadeWithLove />
+      </Box>
+    </Container>
+
         </div>
             )
           }
         }
+
+      //   <form onSubmit={this.onSubmit}>
+      //   <h1>Login Below!</h1>
+      //   <input
+      //     type="email"
+      //     name="userEmail"
+      //     placeholder="Enter Email"
+      //     value={this.state.userEmail}
+      //     onChange={this.handleInputChange}
+      //     required
+      //   />
+      //   <input
+      //     type="password"
+      //     name="password"
+      //     placeholder="Enter Password"
+      //     value={this.state.password}
+      //     onChange={this.handleInputChange}
+      //     required
+      //   /> 
         
-//         {/* STOOoooooooOOOOOOOOOp */}
-//         {/* <body>
-//           <div>
-
-//             <center>
-//               <div>
-//                 <br></br>
-//                 <h4>
-//                   Sign In Please
-//           </h4><br />
-//                 Email <input type='text' placeholder='email or Number' name="userEmail" required onChange={this.handleUserEmailChange} /><br></br>
-//                 Password <input type='password' placeholder='password' name="password" required onChange={this.handlePasswordChange} /><br></br>
-//                 <br></br>
-//                 <Link to="/Shopnew">
-//                   <button
-//                     Click={(event) => {
-//                       this.click(event)
-//                     }}
-//                     onChange={this.handleChange} > login
-//               </button>
-
-//                 </Link>
-//                 <br></br>
-
-//                 <p>
-//                   If you don't have an account <br>
-//                   </br>
-//                   please <Link to="/Sign-up-customer">Signup </Link>
-//                 </p>
-//               </div></center>
-
-//           </div>
-//         </body>
-//       </div> */}
-    
-    
-//       {/* // <div>
-//       //   <body>
-//       //     <div class="padding-all">
-//       //       <div class="header">
-//       //         <h1><img src="./images/5.png" alt=" " /> Gaming Login Form</h1>
-//       //       </div>
-
-//       //       <div class="design-w3l">
-//       //         <div class="mail-form-agile">
-//       //           <form action="#" method="post">
-//       //             <input type="text" name="name" placeholder="Email  or  email..." required="" onChange={this.handleEmailChange} />
-//       //             <input type="password" name="password" class="padding" placeholder="Password" required="" onChange={this.handlePasswordChange} />
-//       //             <Link to="/Shop">
-//       //               <input type="submit" onChange={this.handleChange} value="submit" />
-//       //             </Link>
-//       //           </form>
-//       //         </div>
-//       //         <div class="clear"> </div>
-//       //       </div>
-
-//       //       <div class="footer">
-//       //         <p>© 2017 Gaming Login form. All Rights Reserved | Design by  <a href="https://w3layouts.com/" >  w3layouts </a></p>
-//       //       </div>
-//       //     </div>
-//       //   </body>
-//       // </div>
-// //     )
-// //   }
-// // }
-// // export default Signincustomer;
-//             // sendData() { */}
-//             {/* //   const data = { email: this.state.email, password: this.state.password }
-//             //   console.log(data)
-//             // }
-
-//             // handleChange(e) { */}
-//             {/* //   console.log(e.target.value);
-//             //   this.setState({ [e.target.name]: e.target.value });
-//             // }
-
-
-//             // handleChange(e) {
-//             //   console.log(e.target.value);
-//             //   this.setState({ [e.target.name]: e.target.value });
-//             // }
-
-
-//             // componentDidMount() {
-//             //   fetch('https://localhost:8080')
-//             //     .then(response => response.json())
-//             //     .then(data => this.setState({ data }));
-//             // }
-
-//             // handleEmailChange = evt => {
-//             //   this.setState({ email: evt.target.value });
-//             //   console.log(this.state.email)
-//             // };
-
-//             // handlePasswordChange = evt => {
-//             //   this.setState({ password: evt.target.value });
-//             // };
-//             // handleSubmit = () => {
-//             //   const { email, password } = this.state;
-//             //   alert(`Signed up with email: ${email} password: ${password}`);
-//             // };
-//             // clicked() {
-//             //   this.setState({
-//             //     email: "",
-//             //     password: "",
-//             //     isEnabled: false
-//             //   });
-//             // } */}
+      //   <button  onClick={(event) => {this.onSubmit(event)} }>Submit</button>
+      // </form>
+        
