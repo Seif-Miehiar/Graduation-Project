@@ -16,6 +16,19 @@ const db = new Sequelize("sql7295827", 'sql7295827', 'HcpPj6TMcH', {
         idle: 10000
       }
 })
+//new account
+// const db = new Sequelize("sql7363964", 'sql7363964', 'UCpGxBFUvk', {
+//     host: 'sql7.freemysqlhosting.net',
+//     dialect: 'mysql',
+//     pool: {
+//         max: 10,
+//         min: 0,
+//         acquire: 30000,
+//         idle: 10000
+//       }
+// })
+
+
 
 
 db.sync({ force: false, logging: false  }).then(() => {
